@@ -1,16 +1,23 @@
 const express = require("express");
+const { adminAuth, userAuth } = require("./middlewares/auth");
 const app= express();
 
-app.use("/hello",(req,res) => {
-    res.send("Hello from the server and from nodemon!!!!!")
+app.use("/admin",adminAuth)
+
+app.get("/user/login", (req,res) => {
+    res.send("login successful")
 })
 
-app.get("/user/:userId/:name",(req,res) => {
-    console.log(req.params)
-    const {userId , name} =req.params;
-    console.log(userId);
-    console.log(name)
-    res.send({firstName: "Barkha", secondName: "Bandana"})
+app.get("/user/getData", userAuth, (req,res) =>{
+    res.send("User Data received")
+})
+
+app.get("/admin/getAllData",(req,res) => {
+    res.send("User Data received")
+})
+
+app.get("/admin/deleteAllData",(req,res) => {
+    res.send("User Data Deleted!!")
 })
 
 app.listen(8080, () => {
