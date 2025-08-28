@@ -5,15 +5,15 @@ const connectDB = require("./config/database");
 const User = require("./models/user");
 
 
+app.use(express.json())
+
+
 
 app.post("/signup", async (req,res) => {
+
+    console.log(req.body);
     
-    const user = new User({
-        firstName: "Barkha",
-        lastName: "Bandana",
-        emailId: "barkha@123",
-        password: "barkha@12"
-    });
+    const user = new User(req.body);
    
  
     try{
